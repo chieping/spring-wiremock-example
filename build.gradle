@@ -6,7 +6,8 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "11"
+targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
@@ -14,8 +15,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.codehaus.groovy:groovy-all:3.0.7"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompile "com.github.tomakehurst:wiremock-jre8:2.28.0"
+	testImplementation "com.github.tomakehurst:wiremock-jre8:2.28.0"
+	// as of today, latest rest-assured (4.3.3) causes a problem about groovy's version conflict with spring-boot
+	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.2.1'
+	testImplementation 'io.rest-assured:json-path:4.2.1'
+	testImplementation 'io.rest-assured:xml-path:4.2.1'
 }
 
 test {
